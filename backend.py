@@ -3,6 +3,8 @@ import face_recognition
 import psycopg2
 import numpy as np
 from PIL import Image
+from dotenv import load_dotenv
+import os
 
 cursor = None
 conn = None
@@ -53,11 +55,13 @@ def iniciar_conexion():
     global conn 
     global cursor
 
+    load_dotenv()
+
     conn = psycopg2.connect(
-        host="localhost",
-        database="sarc",
-        user="postgres",
-        password="almacenandoAndo07"
+        host=os.getenv("HOST"),
+        database=os.getenv("DATABASE"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD")
     )
     cursor = conn.cursor()
 
